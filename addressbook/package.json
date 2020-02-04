@@ -11,6 +11,8 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+    "pg": "^7.18.1",
+    "pug": "2.0.0-beta11",
+    "sequelize": "^5.21.3"
   }
 }
