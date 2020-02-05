@@ -26,3 +26,18 @@ blocks:
               "${DOCKER_USERNAME}/dockerizing-nodejs-addressbook:latest"
       secrets:
         - name: dockerhub
+  - name: Test
+    task:
+      secrets:
+        - name: dockerhub
+      prologue:
+        commands:
+          - checkout
+          - >-
+            echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}"
+            --password-stdin
+          - cat docker-compose.ci.yml | envsubst | tee docker-compose.yml
+      jobs:
+        - name: Integration test
+          commands:
+            - docker-compose run addressbook npm test
