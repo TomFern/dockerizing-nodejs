@@ -12,6 +12,15 @@ var db = require('../database');
 //   res.send('respond with a resource');
 // });
 
+router.get("/all", function(req, res) {
+    db.Person.findAll()
+        .then( persons => {
+            res.status(200).send(JSON.stringify(persons));
+        })
+        .catch( err => {
+            res.status(500).send(JSON.stringify(err));
+        });
+});
 router.get("/:id", function(req, res) {
     db.Person.findByPk(req.params.id)
         .then( person => {
@@ -42,15 +51,6 @@ router.delete("/:id", function(req, res) {
     })
         .then( () => {
             res.status(200).send();
-        })
-        .catch( err => {
-            res.status(500).send(JSON.stringify(err));
-        });
-});
-router.get("/all", function(req, res) {
-    db.Person.findAll()
-        .then( persons => {
-            res.status(200).send(JSON.stringify(persons));
         })
         .catch( err => {
             res.status(500).send(JSON.stringify(err));
