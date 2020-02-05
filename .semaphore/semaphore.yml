@@ -24,3 +24,5 @@ blocks:
             - >-
               docker push
               "${DOCKER_USERNAME}/dockerizing-nodejs-addressbook:latest"
+      secrets:
+        - name: dockerhub
