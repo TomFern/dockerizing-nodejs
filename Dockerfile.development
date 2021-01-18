@@ -1,4 +1,4 @@
-FROM registry.semaphoreci.com/node:12
+FROM node:12.13.0-alpine
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 RUN useradd app
