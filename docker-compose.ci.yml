@@ -1,5 +1,6 @@
-version: "3.7"
+# docker-compose.yml
 
+version: "3.7"
 services:
   postgres:
     image: postgres
@@ -13,8 +14,6 @@ services:
 
   addressbook:
     image: $DOCKER_USERNAME/dockerizing-nodejs-addressbook:latest
-    # build:
-    #   context: .
     command: "npn run migrate && npm run pm2"
     environment:
       DB_SCHEMA: postgres
@@ -28,3 +27,4 @@ services:
         
 volumes:
   addressbook-db:
+
