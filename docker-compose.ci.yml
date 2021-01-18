@@ -15,7 +15,7 @@ services:
     image: $DOCKER_USERNAME/dockerizing-nodejs-addressbook:latest
     # build:
     #   context: .
-  command: "npn run migrate && npm start"
+    command: "npn run migrate && npm run pm2"
     environment:
       DB_SCHEMA: postgres
       DB_USER: postgres

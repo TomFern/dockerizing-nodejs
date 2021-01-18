@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "test": "jest",
+    "pm2": "pm2 start processes.json --no-daemon",
     "migrate": "node ./bin/migrate.js"
   },
   "dependencies": {
@@ -13,7 +15,11 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "pg": "^7.18.1",
+    "pm2": "^4.2.3",
     "pug": "2.0.0-beta11",
     "sequelize": "^5.21.3"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0"
   }
 }

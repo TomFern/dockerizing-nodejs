@@ -1,0 +1,43 @@
+version: v1.0
+name: Docker
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Build
+    task:
+      jobs:
+        - name: docker build
+          commands:
+            - checkout
+            - >-
+              echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}"
+              --password-stdin
+            - >-
+              docker pull
+              "${DOCKER_USERNAME}/dockerizing-nodejs-addressbook:latest" || true
+            - >-
+              docker build --cache-from
+              "${DOCKER_USERNAME}/dockerizing-nodejs-addressbook:latest" -t
+              "${DOCKER_USERNAME}/dockerizing-nodejs-addressbook:latest" .
+            - >-
+              docker push
+              "${DOCKER_USERNAME}/dockerizing-nodejs-addressbook:latest"
+      secrets:
+        - name: dockerhub
+  - name: Test
+    task:
+      secrets:
+        - name: dockerhub
+      prologue:
+        commands:
+          - checkout
+          - >-
+            echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}"
+            --password-stdin
+      jobs:
+        - name: Integration test
+          commands:
+            - cat docker-compose.ci.yml | envsubst | tee docker-compose.yml
+            - docker-compose run addressbook npm test
