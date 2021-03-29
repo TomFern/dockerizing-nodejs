@@ -12,7 +12,6 @@ services:
       - addressbook-db:/var/lib/postgresql/data
 
   addressbook:
-    # image: addressbook:latest
     build:
       context: .
       dockerfile: Dockerfile.development

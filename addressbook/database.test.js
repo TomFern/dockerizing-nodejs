@@ -1,6 +1,6 @@
 const db = require('./database');
 beforeAll(async () => {
-    await db.sequelize.sync();
+    await db.sequelize.sync({ force: true });
 });
 test('create person', async () => {
     expect.assertions(1);
@@ -11,6 +11,7 @@ test('create person', async () => {
         email: 'bdraper@mars.com'
     });
     expect(person.id).toEqual(1);
+    // expect(person.firstName).toEqual('Bobbie');
 });
 test('get person', async () => {
     expect.assertions(2);
