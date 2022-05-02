@@ -40,4 +40,4 @@ blocks:
         - name: Integration test
           commands:
             - cat docker-compose.ci.yml | envsubst | tee docker-compose.yml
-            - docker-compose run addressbook npm test
+            - docker compose run addressbook npm test
