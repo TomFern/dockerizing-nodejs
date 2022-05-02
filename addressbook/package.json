@@ -3,25 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "pm2": "pm2 start processes.json --no-daemon",
     "start": "node ./bin/www",
     "test": "jest",
-    "pm2": "pm2 start processes.json --no-daemon",
     "migrate": "node ./bin/migrate.js"
   },
   "dependencies": {
-    "clean-css": "^4.2.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "node-notifier": "^9.0.0",
-    "pg": "^7.18.1",
-    "pm2": "^4.2.3",
-    "pug": "^3.0.1",
-    "sequelize": "^5.21.3"
+    "pg": "^8.7.3",
+    "pm2": "^5.2.0",
+    "sequelize": "^6.19.0"
   },
   "devDependencies": {
-    "jest": "^25.1.0"
+    "jest": "^28.0.3"
   }
 }
