@@ -8,9 +8,23 @@ This is an example project for the following post in the Semaphore CI/CD blog:
 
 ## Run uncontained
 
+Setup:
+
 ```bash
 $ cd addressbook
 $ npm install
+```
+
+Start a PostgreSQL database and create the tables:
+
+```bash
+$ docker run -it -e "POSTGRES_HOST_AUTH_METHOD=trust" -p 5432:5432 postgres
+$ npm run migrate
+```
+
+Start application:
+
+```bash
 $ npm start
 ```
 
@@ -18,13 +32,14 @@ $ npm start
 
 ```bash
 $ docker build -t addressbook .
-$ docker run -it addressbook
+$ docker run -it -p 3000:3000 addressbook
 ```
 
 ## Run with Docker Compose: app + database
 
 ```bash
-$ docker-compose up
+$ docker compose run addressbook npm run migrate
+$ docker compose up --build
 ```
 
 ## Run tests with Docker
@@ -32,12 +47,12 @@ $ docker-compose up
 Stop all containers and execute:
 
 ```bash
-$ docker-compose run addressbook npm test
+$ docker compose run addressbook npm test
 ```
 
 ## LICENSE
 
-Copyright 2021 Rendered Text
+Copyright 2022 Rendered Text
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
