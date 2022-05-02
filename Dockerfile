@@ -1,10 +1,13 @@
-FROM registry.semaphoreci.com/node:12
+#FROM node:12.13.0-alpine
+FROM node:16.15-alpine3.14
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
-RUN adduser app
+RUN adduser -S app
 COPY addressbook/ .
 RUN npm install
-RUN chown -R app:app /opt/app
+#
+RUN npm install --save pm2
+RUN chown -R app /opt/app
 USER app
 EXPOSE 3000
 CMD [ "npm", "run", "pm2" ]
