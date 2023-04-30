@@ -13,8 +13,8 @@ services:
       - addressbook-db:/var/lib/postgresql/data
 
   addressbook:
-    image: $DOCKER_USERNAME/dockerizing-nodejs-addressbook:latest
-    command: "npm run migrate && npm run pm2"
+    image: $DOCKER_USERNAME/addressbook:latest
+    command: "npm run migrate && npm start"
     environment:
       DB_SCHEMA: postgres
       DB_USER: postgres
