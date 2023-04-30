@@ -30,6 +30,13 @@ Start application:
 $ npm start
 ```
 
+## API Usage
+
+- `GET /persons/all` retrieve all persons in the addressbook
+- `GET /persons/1` retrieve person with id 1
+- `PUT /persons/` add a person to the addressbook
+- `DELETE /persons/1` delete person with id 1
+
 ## Build Docker Image
 
 ```bash
