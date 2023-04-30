@@ -1,4 +1,4 @@
-# docker-compose.yml
+# docker-compose.ci.yml
 
 version: "3.9"
 services:
@@ -13,7 +13,7 @@ services:
       - addressbook-db:/var/lib/postgresql/data
 
   addressbook:
-    image: $DOCKER_USERNAME/addressbook:latest
+    image: $DOCKER_USERNAME/addressbook:$SEMAPHORE_WORKFLOW_ID
     command: "npm run migrate && npm start"
     environment:
       DB_SCHEMA: postgres
