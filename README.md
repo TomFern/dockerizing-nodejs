@@ -37,6 +37,17 @@ $ npm start
 - `PUT /persons/` add a person to the addressbook
 - `DELETE /persons/1` delete person with id 1
 
+Example:
+
+```bash
+curl -X PUT http://localhost:3000/persons -H 'Content-Type: application/json' -d '{"id": 1, "firstName": "David", "lastName": "Bowie"}'
+```
+
+```bash
+curl -X GET http://localhost:3000/persons -H 'Content-Type: application/json'
+{"firstName":"David","lastName":"Bowie","id":1,"updatedAt":"2023-04-30T22:44:29.115Z","createdAt":"2023-04-30T22:44:29.115Z"}
+```
+
 ## Build Docker Image
 
 ```bash
