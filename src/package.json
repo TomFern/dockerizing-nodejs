@@ -1,9 +1,8 @@
 {
   "name": "addressbook",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "pm2": "pm2 start processes.json --no-daemon",
     "start": "node ./bin/www",
     "test": "jest",
     "migrate": "node ./bin/migrate.js"
@@ -14,7 +13,6 @@
     "express": "~4.18.2",
     "morgan": "~1.9.1",
     "pg": "^8.7.3",
-    "pm2": "^5.2.0",
     "sequelize": "^6.29.0"
   },
   "devDependencies": {
