@@ -6,12 +6,14 @@ This is an example project for the following post in the Semaphore CI/CD blog:
 
 [Dockerizing a Node.js Web Application](https://semaphoreci.com/community/tutorials/dockerizing-a-node-js-web-application)
 
+![Pipeline](.semaphore/pipeline.jpg)
+
 ## Run uncontained
 
 Setup:
 
 ```bash
-$ cd addressbook
+$ cd src
 $ npm install
 ```
 
@@ -27,6 +29,13 @@ Start application:
 ```bash
 $ npm start
 ```
+
+## API Usage
+
+- `GET /persons/all` retrieve all persons in the addressbook
+- `GET /persons/1` retrieve person with id 1
+- `PUT /persons/` add a person to the addressbook
+- `DELETE /persons/1` delete person with id 1
 
 ## Build Docker Image
 
@@ -44,15 +53,13 @@ $ docker compose up --build
 
 ## Run tests with Docker
 
-Stop all containers and execute:
-
 ```bash
 $ docker compose run addressbook npm test
 ```
 
 ## LICENSE
 
-Copyright 2022 Rendered Text
+Copyright 2023 Rendered Text
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
