@@ -13,7 +13,7 @@ env:
 registry:
   username: tomfern
   password:
-    - DOCKER_HUB_PASSWORD
+    - DOCKER_PASSWORD
 
 accessories:
   database:
