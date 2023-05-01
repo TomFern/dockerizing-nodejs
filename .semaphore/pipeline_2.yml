@@ -17,6 +17,7 @@ blocks:
           commands:
             - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
             - checkout
+            - mrsk build create
             - mrsk redeploy
       secrets:
         - name: addressbook-deploy
