@@ -1,0 +1,30 @@
+service: addressbook
+image: tomfern/addressbook
+servers:
+  - 216.238.103.180
+env:
+  clear:
+    DB_USER: postgres
+    DB_SCHEMA: postgres
+    DB_HOST: 216.238.110.21
+    DB_PORT: 5432
+  secret:
+    - DB_PASSWORD
+registry:
+  username: tomfern
+  password:
+    - DOCKER_HUB_PASSWORD
+
+accessories:
+  database:
+    image: postgres:latest
+    host: 216.238.110.21
+    port: 5432
+    env:
+      secret:
+        - POSTGRES_PASSWORD
+    volumes:
+      - /var/lib/postgresql/data:/var/lib/postgresql/data
+
+
+# mrsk app exec --reuse "npm run migrate"
