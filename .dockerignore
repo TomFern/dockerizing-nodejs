@@ -1,1 +1,3 @@
-addressbook/node_modules/
+.git
+.gitignore
+src/node_modules/
