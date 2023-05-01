@@ -18,12 +18,12 @@ blocks:
             - checkout
             - mrsk deploy
       secrets:
-        - name: addressbook-db
+        - name: addressbook-deploy
         - name: dockerhub
   - name: Migrate
     task:
       secrets:
-        - name: addressbook-db
+        - name: addressbook-deploy
         - name: dockerhub
       jobs:
         - name: Migrate
