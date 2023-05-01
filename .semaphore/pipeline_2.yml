@@ -1,0 +1,31 @@
+version: v1.0
+name: Continuous Deployment
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+global_job_config:
+  prologue:
+    commands:
+      - sudo gem install mrsk
+blocks:
+  - name: Deploy
+    task:
+      jobs:
+        - name: Deploy
+          commands:
+            - checkout
+            - mrsk deploy
+      secrets:
+        - name: addressbook-db
+        - name: dockerhub
+  - name: Migrate
+    task:
+      secrets:
+        - name: addressbook-db
+        - name: dockerhub
+      jobs:
+        - name: Migrate
+          commands:
+            - checkout
+            - mrsk app exec --reuse "npm run migrate"
