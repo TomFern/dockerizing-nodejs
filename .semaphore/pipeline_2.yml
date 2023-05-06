@@ -1,0 +1,34 @@
+version: v1.0
+name: Continuous Deployment
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+global_job_config:
+  prologue:
+    commands:
+      - sem-version ruby 3.2
+      - gem install mrsk
+blocks:
+  - name: Deploy
+    task:
+      jobs:
+        - name: Deploy
+          commands:
+            - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
+            - checkout
+            - mrsk build create
+            - mrsk redeploy
+      secrets:
+        - name: addressbook-deploy
+        - name: dockerhub
+  - name: Migrate
+    task:
+      secrets:
+        - name: addressbook-deploy
+        - name: dockerhub
+      jobs:
+        - name: Migrate
+          commands:
+            - checkout
+            - mrsk app exec --reuse "npm run migrate"
