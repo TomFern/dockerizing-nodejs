@@ -4,10 +4,10 @@ servers:
   - 216.238.101.228
 env:
   clear:
-    DB_USER: postgres
-    DB_SCHEMA: postgres
+    # DB_USER: postgres
+    # DB_SCHEMA: postgres
     DB_HOST: 216.238.113.141
-    DB_PORT: 5432
+    # DB_PORT: 5432
   secret:
     - DB_PASSWORD
 registry:

@@ -36,4 +36,4 @@ promotions:
   - name: Deploy to  Prod
     pipeline_file: pipeline_2.yml
     auto_promote:
-      when: branch = 'master' AND result = 'passed'
+      when: result = 'passed'
