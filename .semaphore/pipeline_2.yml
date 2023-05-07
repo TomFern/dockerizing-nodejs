@@ -24,6 +24,8 @@ blocks:
         - name: dockerhub
   - name: Migrate
     task:
+      secrets:
+        - name: addressbook-deploy
       jobs:
         - name: Migrate
           commands:
