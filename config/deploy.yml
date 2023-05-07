@@ -1,12 +1,12 @@
 service: addressbook
 image: tomfern/addressbook
 servers:
-  - 216.238.103.180
+  - 216.238.101.228
 env:
   clear:
     DB_USER: postgres
     DB_SCHEMA: postgres
-    DB_HOST: 216.238.110.21
+    DB_HOST: 216.238.113.141
     DB_PORT: 5432
   secret:
     - DB_PASSWORD
@@ -17,8 +17,8 @@ registry:
 
 accessories:
   database:
-    image: postgres:latest
-    host: 216.238.110.21
+    image: postgres:14
+    host: 216.238.113.141
     port: 5432
     env:
       secret:
