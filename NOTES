@@ -1,0 +1,4 @@
+ docker run -it -d -p 3000:3000 -e DB_HOST=216.238.100.30 -e POSTGRES_PASSWORD=sekret1 tomfern/addressbook:latest
+
+
+ docker run --detach --name healthcheck-addressbook-d4e824519fd0f7c3b54acbce9b751d2d556bb57c --publish 3999:3000 --label service=healthcheck-addressbook -e MRSK_CONTAINER_NAME="healthcheck-addressbook" -e [REDACTED] -e DB_HOST="216.238.100.30" --health-cmd "curl -f http://localhost:3000/ || exit 1" --health-interval "1s" tomfern/addressbook:d4e824519fd0f7c3b54acbce9b751d2d556bb57c
