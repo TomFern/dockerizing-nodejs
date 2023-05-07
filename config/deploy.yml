@@ -9,7 +9,7 @@ env:
     DB_HOST: 216.238.113.141
     # DB_PORT: 5432
   secret:
-    - DB_PASSWORD
+    - POSTGRES_PASSWORD
 registry:
   username: tomfern
   password:
