@@ -68,6 +68,26 @@ $ docker compose up --build
 $ docker compose run addressbook npm test
 ```
 
+## Deploy with mrsk
+
+You will need the IP addresses of two servers and SSH access to them.
+
+Prepare
+
+```bash
+$ gem install mrsk
+$ vim config/deploy.yml
+$ cp env.example .env
+$ vim .env
+```
+
+Deploy:
+
+```bash
+$ mrsk setup
+```
+
+
 ## LICENSE
 
 Copyright 2023 Rendered Text
