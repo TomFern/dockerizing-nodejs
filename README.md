@@ -45,7 +45,13 @@ curl -X PUT http://localhost:3000/persons -H 'Content-Type: application/json' -d
 
 ```bash
 curl -X GET http://localhost:3000/persons -H 'Content-Type: application/json'
-{"firstName":"David","lastName":"Bowie","id":1,"updatedAt":"2023-04-30T22:44:29.115Z","createdAt":"2023-04-30T22:44:29.115Z"}
+{
+  "firstName": "David",
+  "lastName": "Bowie",
+  "id": 1,
+  "updatedAt": "2023-04-30T22:44:29.115Z",
+  "createdAt": "2023-04-30T22:44:29.115Z"
+}
 ```
 
 ## Build Docker Image
@@ -75,7 +81,7 @@ You will need the IP addresses of two servers and SSH access to them.
 Prepare
 
 ```bash
-$ gem install mrsk
+$ gem install mrsk -v 0.11.0
 $ vim config/deploy.yml
 $ cp env.example .env
 $ vim .env
