@@ -1,9 +1,11 @@
 version: v1.0
-name: Docker
+name: CI Pipeline
 agent:
   machine:
-    type: e1-standard-2
-    os_image: ubuntu2004
+    type: s1-kubernetes
+    os_image: ''
+execution_time_limit:
+  hours: 3
 blocks:
   - name: Build
     task:
@@ -17,18 +19,3 @@ blocks:
             - 'docker push "${DOCKER_USERNAME}/addressbook:latest"'
             - 'docker tag "${DOCKER_USERNAME}/addressbook:latest" "${DOCKER_USERNAME}/addressbook:$SEMAPHORE_WORKFLOW_ID"'
             - 'docker push "${DOCKER_USERNAME}/addressbook:$SEMAPHORE_WORKFLOW_ID"'
-      secrets:
-        - name: dockerhub
-  - name: Test
-    task:
-      secrets:
-        - name: dockerhub
-      prologue:
-        commands:
-          - checkout
-          - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
-      jobs:
-        - name: Integration test
-          commands:
-            - cat docker-compose.ci.yml | envsubst | tee docker-compose.yml
-            - docker-compose run addressbook npm test
