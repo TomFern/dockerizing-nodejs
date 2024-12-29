@@ -16,4 +16,14 @@ blocks:
       jobs:
         - name: 'Job #1'
           commands:
-            - 'echo "Hello, World!"'
+            - 'echo "Hello, World!" > file.txt'
+            - cache store mykey file.txt
+  - name: 'Block #2'
+    dependencies:
+      - 'Block #1'
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - cache restore mykey
+            - cat file.txt
