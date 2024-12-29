@@ -4,6 +4,9 @@ agent:
   machine:
     type: s1-kubernetes
     os_image: ''
+  containers:
+    - name: main
+      image: 'semaphoreci/ubuntu:20.04'
 execution_time_limit:
   hours: 3
 blocks:
