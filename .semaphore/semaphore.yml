@@ -7,15 +7,10 @@ agent:
 execution_time_limit:
   hours: 3
 blocks:
-  - name: Build
+  - name: 'Block #1'
+    dependencies: []
     task:
       jobs:
-        - name: docker build
+        - name: 'Job #1'
           commands:
-            - checkout
-            - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
-            - 'docker pull "${DOCKER_USERNAME}/addressbook:latest" || true'
-            - 'docker build --cache-from "${DOCKER_USERNAME}/addressbook:latest" -t "${DOCKER_USERNAME}/addressbook:latest" .'
-            - 'docker push "${DOCKER_USERNAME}/addressbook:latest"'
-            - 'docker tag "${DOCKER_USERNAME}/addressbook:latest" "${DOCKER_USERNAME}/addressbook:$SEMAPHORE_WORKFLOW_ID"'
-            - 'docker push "${DOCKER_USERNAME}/addressbook:$SEMAPHORE_WORKFLOW_ID"'
+            - 'echo "Hello, World!"'
