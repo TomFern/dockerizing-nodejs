@@ -18,6 +18,9 @@ blocks:
           commands:
             - 'echo "Hello, World!" > file.txt'
             - cache store mykey file.txt
+            - artifact push job file.txt
+            - artifact push workflow file.txt
+            - artifact push project file.txt
   - name: 'Block #2'
     dependencies:
       - 'Block #1'
