@@ -18,9 +18,10 @@ blocks:
           commands:
             - 'echo "Hello, World!" > file.txt'
             - cache store mykey file.txt
-            - artifact push job file.txt
-            - artifact push workflow file.txt
-            - artifact push project file.txt
+            - '#artifact push job file.txt'
+            - '#artifact push workflow file.txt'
+            - '#artifact push project file.txt'
+          parallelism: 4
   - name: 'Block #2'
     dependencies:
       - 'Block #1'
