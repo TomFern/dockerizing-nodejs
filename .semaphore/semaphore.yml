@@ -1,37 +1,35 @@
 version: v1.0
-name: CI Pipeline
+name: Docker
 agent:
   machine:
-    type: s1-kubernetes
-    os_image: ''
-  containers:
-    - name: main
-      image: 'semaphoreci/ubuntu:20.04'
-execution_time_limit:
-  hours: 3
+    type: e1-standard-2
+    os_image: ubuntu2004
 blocks:
-  - name: 'Block #1'
-    dependencies: []
+  - name: Build
     task:
       jobs:
-        - name: 'Job #1'
+        - name: docker build
           commands:
-            - echo $FOO - $BAR
-          matrix:
-            - env_var: FOO
-              values:
-                - value1
-                - value2
-            - env_var: BAR
-              values:
-                - value1
-                - value2
-  - name: 'Block #2'
-    dependencies:
-      - 'Block #1'
+            - checkout
+            - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
+            - 'docker pull "${DOCKER_USERNAME}/addressbook:latest" || true'
+            - 'docker build --cache-from "${DOCKER_USERNAME}/addressbook:latest" -t "${DOCKER_USERNAME}/addressbook:latest" .'
+            - 'docker push "${DOCKER_USERNAME}/addressbook:latest"'
+            - 'docker tag "${DOCKER_USERNAME}/addressbook:latest" "${DOCKER_USERNAME}/addressbook:$SEMAPHORE_WORKFLOW_ID"'
+            - 'docker push "${DOCKER_USERNAME}/addressbook:$SEMAPHORE_WORKFLOW_ID"'
+      secrets:
+        - name: dockerhub
+  - name: Test
     task:
+      secrets:
+        - name: dockerhub
+      prologue:
+        commands:
+          - checkout
+          - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
       jobs:
-        - name: 'Job #1'
+        - name: Integration test
           commands:
-            - cache restore mykey
-            - cat file.txt
+            - cat docker-compose.ci.yml | envsubst | tee docker-compose.yml
+            - docker-compose run addressbook npm test
+
