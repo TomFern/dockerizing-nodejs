@@ -27,9 +27,12 @@ blocks:
         commands:
           - checkout
           - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
+      epilogue:
+        commands:
+          - docker-compose down --volumes || true
       jobs:
         - name: Integration test
           commands:
             - cat docker-compose.ci.yml | envsubst | tee docker-compose.yml
-            - docker-compose run addressbook npm test
-
+            - docker-compose up -d postgres
+            - docker-compose run --use-aliases addressbook npm test
