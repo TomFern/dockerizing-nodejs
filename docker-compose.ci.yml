@@ -10,7 +10,7 @@ services:
     ports: 
       - '5432:5432'
     volumes:
-      - addressbook-db:/var/lib/postgresql/data
+      - addressbook-db:/var/lib/postgresql
 
   addressbook:
     image: $DOCKER_USERNAME/addressbook:$SEMAPHORE_WORKFLOW_ID
@@ -27,4 +27,3 @@ services:
         
 volumes:
   addressbook-db:
-
